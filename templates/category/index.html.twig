@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des catégories{% endblock %}
+
+{% block body %}
+    <a class="btn btn-warning text-white mb-3" href="{{ path('app_index') }}">
+        <i class="fas fa-home"></i> Retour à la page d'accueil
+    </a>
+    <h1 class="title text-warning text-center mb-4">Liste des catégories</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group row align-items-end">
+        <div class="col">
+            {{ form_widget(form.search, {
+                'attr': {
+                    'class': 'form-control border shadow-sm',
+                    'placeholder': 'Rechercher une catégorie...'
+                }
+            }) }}
+        </div>
+        <div class="col-auto">
+            <div role="group" aria-label="Actions">
+                <button class="btn btn-warning text-white btn-menu" type="submit">Rechercher</button>
+                <button class="btn btn-secondary btn-menu" type="button" onclick="window.location.href='{{ path('category_index') }}'">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-5 g-3">
+            {% for categorie in category %}
+                <div class="col">
+                    <div class="card border-warning shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-warning">{{ categorie.name }}</h5>
+                            <a href="{{ path('category_show', { categoryName: categorie.name }) }}"
+                               class="btn btn-warning text-white mt-3">
+                                <i class="fas fa-info-circle"></i> Voir les titres
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col">
+                    <p class="text-center">Aucune catégorie trouvée.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

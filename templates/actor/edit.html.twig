@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ actor.name }}{% endblock %}
+
+{% block body %}
+    <a class="btn btn-danger btn-menu" href="{{ path('admin_actorAdmin') }}">Liste des acteurs</a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="text-center mb-4">
+                    <h1 class="mb-0">Modifier {{ actor.name }}</h1>
+                </div>
+                {{ include('actor/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

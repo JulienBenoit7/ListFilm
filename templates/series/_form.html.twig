@@ -1,0 +1,71 @@
+{{ form_start(form) }}
+    {{ form_row(form.title, {
+        'label': 'Titre de le série',
+        'attr': {
+            'class': 'form-control border shadow-sm mb-3'
+        }
+    }) }}
+
+{{ form_row(form.synopsis, {
+    'label': 'Synopsis de la série',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+        'style': 'resize: none'
+    }
+}) }}
+
+{{ form_row(form.year, {
+    'label': 'Année de sortie de la série',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+    }
+}) }}
+
+{{ form_row(form.trailer, {
+    'label': 'Bande annonce de la série',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+    }
+}) }}
+
+{{ form_row(form.posterFile, {
+    'label': 'Image de la série',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+    }
+}) }}
+
+{{ form_row(form.actors, {
+    'label': 'Acteur de la série',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+    }
+}) }}
+
+{{ form_row(form.category, {
+    'label': 'Catégorie de la série',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+{{ form_row(form.type, {
+    'label': 'Support de la série',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+{{ form_row(form.location, {
+    'label': "Position de la série dans l'étagère",
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+<div class="mt-3 text-center">
+    <div class="d-inline-block">
+        <button class="btn btn-success">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

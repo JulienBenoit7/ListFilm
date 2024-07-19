@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Vidéo Club{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="jumbotron text-center bg-secondary text-white" style="padding: 4rem 2rem;">
+            <h1 class="display-4 font-weight-bold">Vidéo Club</h1>
+            <p class="lead">Toute ma collection de films et de séries.</p>
+            <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.5);">
+        </div>
+
+        <div class=" mt-5 row justify-content-center">
+            <div class="col-md-3">
+                <div class="card bg-light mb-4 shadow-sm border-0" style="transition: transform 0.2s;">
+                    <div class="card-body text-center">
+                        <i class="bi bi-film" style="font-size: 3rem; color: #007bff;"></i>
+                        <h5 class="card-title mt-3">Films</h5>
+                        <a href="{{ path('film_index') }}" class="btn btn-primary btn-block mt-3">Voir tous les films</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light mb-4 shadow-sm border-0" style="transition: transform 0.2s;">
+                    <div class="card-body text-center">
+                        <i class="bi bi-tv" style="font-size: 3rem; color: #28a745;"></i>
+                        <h5 class="card-title mt-3">Séries</h5>
+                        <a href="{{ path('series_index') }}" class="btn btn-success btn-block mt-3">Voir toutes les séries</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light mb-4 shadow-sm border-0" style="transition: transform 0.2s;">
+                    <div class="card-body text-center">
+                        <i class="bi bi-list" style="font-size: 3rem; color: #ffc107;"></i>
+                        <h5 class="card-title mt-3">Catégories</h5>
+                        <a href="{{ path('category_index') }}" class="btn btn-warning text-white btn-block mt-3">Voir toutes les catégories</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light mb-4 shadow-sm border-0" style="transition: transform 0.2s;">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people" style="font-size: 3rem; color: #dc3545;"></i>
+                        <h5 class="card-title mt-3">Acteurs</h5>
+                        <a href="{{ path('actor_index') }}" class="btn btn-danger btn-block mt-3">Voir tous les acteurs</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

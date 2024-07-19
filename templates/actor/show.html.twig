@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acteur : {{ actors.name }}{% endblock %}
+
+{% block body %}
+    <a href="{{ path('actor_index') }}" class="mt-3 btn btn-danger">Retour à la liste des acteurs</a>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center text-danger">{{ actors.name }}</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card border-danger mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h2 class="mb-0">Films</h2>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% if films %}
+                            {% for film in films %}
+                                <li class="list-group-item">
+                                    <a href="{{ path('film_show', { id: film.id }) }}" class="text-decoration-none stretched-link text-danger">
+                                        {{ film.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item text-muted">Aucun film trouvé pour cet acteur.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card border-danger mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h2 class="mb-0">Séries</h2>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% if series %}
+                            {% for serie in series %}
+                                <li class="list-group-item">
+                                    <a href="{{ path('series_show', { id: serie.id }) }}" class="text-decoration-none stretched-link text-danger">
+                                        {{ serie.title }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item text-muted">Aucune série trouvée pour cet acteur.</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

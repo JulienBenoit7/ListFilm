@@ -1,0 +1,74 @@
+{{ form_start(form) }}
+    {{ form_row(form.title, {
+        'label': 'Titre du film',
+        'attr': {
+            'class': 'form-control border shadow-sm mb-3'
+        }
+    }) }}
+
+{{ form_row(form.synopsis, {
+    'label': 'Synopsis du film',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+        'style': 'resize: none'
+    }
+}) }}
+
+{{ form_row(form.year, {
+    'label': 'Année de sortie du film',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+    }
+}) }}
+
+{{ form_row(form.trailer, {
+    'label': 'Bande annonce du film',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+{{ form_row(form.posterFile, {
+    'label': 'Image du film',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+{{ form_row(form.actors, {
+    'label': 'Acteur du film',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3',
+    }
+}) }}
+
+{{ form_row(form.category, {
+    'label': 'Catégorie du film',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+{{ form_row(form.type, {
+    'label': 'Support du film',
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+{{ form_row(form.location, {
+    'label': "Position du film dans l'étagère",
+    'attr': {
+        'class': 'form-control border shadow-sm mb-3'
+    }
+}) }}
+
+
+
+
+<div class="mt-3 text-center">
+    <div class="d-inline-block">
+        <button class="btn btn-primary" style="margin-right: 1rem">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier {{ category.name }}{% endblock %}
+
+{% block body %}
+    <a class="btn btn-warning btn-menu text-white mb-3" href="{{ path('admin_categoryAdmin') }}">Liste des catégories admin</a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="text-center mb-4">
+                    <h1 class="mb-0">Modifier {{ category.name }}</h1>
+                </div>
+                {{ include('category/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

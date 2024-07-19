@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de mes séries{% endblock %}
+
+{% block body %}
+    <a class="btn btn-success btn-menu mb-3" href="{{ path('app_index') }}">Retour à la page d'accueil</a>
+    <h1 class="title text-success text-center">Toutes les séries</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group row align-items-end">
+        <div class="col">
+            {{ form_widget(form.search, {
+                'attr': {
+                    'class': 'form-control border shadow-sm',
+                    'placeholder': 'Rechercher une série...'
+                }
+            }) }}
+        </div>
+        <div class="col-auto">
+            <div role="group" aria-label="Actions">
+                <button class="btn btn-success btn-menu" type="submit">Rechercher</button>
+                <button class="btn btn-secondary btn-menu" type="button" onclick="window.location.href='{{ path('series_index') }}'">Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-5 g-3">
+            {% if series is not empty %}
+                {% for serie in series %}
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            {% if serie.poster is not empty %}
+                                <img src="{{ vich_uploader_asset(serie) }}" class="card-img-top" style="width: auto; height: 15rem;" alt="{{ serie.title }}">
+                            {% else %}
+                                <img src="{{ asset('uploads/images/posters/Clapperboard_1000_0001.jpg') }}"
+                                     class="card-img-top img-fluid" style="width: auto; height: 15rem;"  alt="Image par défaut">
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ serie.title }}</h5>
+                                <p class="card-text">{{ serie.synopsis | slice(0, 100) ~ '...' }}</p>
+                                <a href="{{ path('series_show', { id: serie.id }) }}" class="btn btn-success btn-menu">Voir la fiche</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col">
+                        <p class="no-series text-center">Aucune série trouvée.</p>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

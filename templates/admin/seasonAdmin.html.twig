@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des saisons administrateur{% endblock %}
+
+{% block body %}
+<a class="btn btn-success btn-menu" href="{{ path('admin_index') }}">Menu administrateur</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="title text-center mb-4">Liste des saisons disponibles</h1>
+
+            <table class="table text-center">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Série</th>
+                    <th scope="col">Saison</th>
+                    <th scope="col">Synopsis</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for saison in season %}
+                    <tr>
+                        <td class="align-middle">{{ saison.series.title }}</td>
+                        <td class="align-middle">{{ saison.number }}</td>
+                        <td class="align-middle" style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
+                            {% set max_length = 150 %}
+                            {% set synopsis = saison.synopsis|slice(0, max_length) %}
+                            {% if saison.synopsis|length > max_length %}
+                                {{ synopsis ~ '...' }}
+                            {% else %}
+                                {{ synopsis }}
+                            {% endif %}
+                        </td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ path('season_edit', {'id': saison.id}) }}" class="btn btn-success me-2">Modifier</a>
+                                <form method="post" action="{{ path('season_delete', {'id': saison.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette saison ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ saison.id) }}">
+                                    <button type="submit" class="btn btn-secondary">Supprimer</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endblock %}

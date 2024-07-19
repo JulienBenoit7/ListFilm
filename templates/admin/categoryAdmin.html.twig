@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des catégories administrateur{% endblock %}
+
+{% block body %}
+<a class="btn btn-warning btn-menu mb-3 text-white" href="{{ path('admin_index') }}">Menu administrateur</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="title text-center mb-4">Liste des catégories disponibles</h1>
+            <table class="table text-center">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for categorie in category %}
+                    <tr>
+                        <td>{{ categorie.name }}</td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ path('category_edit', {'id': categorie.id}) }}" class="btn btn-warning text-white me-2">Modifier</a>
+                                <form method="post" action="{{ path('category_delete', {'id': categorie.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ categorie.id) }}">
+                                    <button type="submit" class="btn btn-secondary">Supprimer</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endblock %}

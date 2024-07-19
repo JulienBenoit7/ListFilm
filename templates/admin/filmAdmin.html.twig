@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de films administrateur{% endblock %}
+
+{% block body %}
+    <a class="btn btn-primary btn-menu mb-3" href="{{ path('admin_index') }}">Menu administrateur</a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="title text-center mb-4">Liste des films disponibles</h1>
+
+                <table class="table text-center">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Synopsis</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Bande annonce</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Acteur</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Catégorie</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for film in films %}
+                        <tr>
+                            <td class="align-middle">{{ film.title }}</td>
+                            <td class="align-middle" style="max-width: 300px; overflow: hidden; text-overflow: ellipsis;">
+                                {% set max_length = 150 %}
+                                {% set synopsis = film.synopsis|slice(0, max_length) %}
+                                {% if film.synopsis|length > max_length %}
+                                    {{ synopsis ~ '...' }}
+                                {% else %}
+                                    {{ synopsis }}
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">{{ film.type }}</td>
+                            <td class="align-middle">
+                                {% if film.trailer is not empty %}
+                                    Oui
+                                {% else %}
+                                    Non
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">{{ film.location }}</td>
+                            <td class="align-middle">
+                                {% for actor in film.actors %}
+                                    {{ actor.name }}
+                                {% endfor %}
+                            </td>
+                            <td class="align-middle">
+                                {% if film.poster is not empty %}
+                                    Oui
+                                {% else %}
+                                    Non
+                                {% endif %}
+                            </td>
+                            <td class="align-middle">{{ film.category.name }}</td>
+                            <td class="align-middle">
+                                <div class="d-flex justify-content-center">
+                                    <a href="{{ path('film_edit', {'id': film.id}) }}" class="btn btn-primary me-2">Modifier</a>
+                                    <form method="post" action="{{ path('film_delete', {'id': film.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce film ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ film.id) }}">
+                                        <button type="submit" class="btn btn-secondary">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

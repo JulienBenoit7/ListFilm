@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ films.title }}
+{% endblock %}
+
+{% block body %}
+    <a class="btn btn-primary mb-3" href="{{ path('film_index') }}">Retour à la liste des films</a>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="text-center">
+                        {% if films.poster is not empty %}
+                            <img src="{{ vich_uploader_asset(films) }}" class="card-img-top img-fluid" style="width: auto; height: 25rem;" alt="{{ films.title }}">
+                        {% else %}
+                            <img src="{{ asset('uploads/images/posters/Clapperboard_1000_0001.jpg') }}" class="card-img-top img-fluid" style="width: auto; height: 25rem;" alt="Image par défaut">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title text-center text-primary">{{ films.title }}</h1>
+                        <h5 class="card-subtitle mb-3 text-center">
+                            Catégorie: <a href="{{ path('category_show', { categoryName: films.category.name }) }}" class="text-decoration-none text-primary">{{ films.category.name }}</a>
+                        </h5>
+                        {% if films.year is not empty %}
+                            <p class="card-text text-center"><strong>Année de sortie:</strong> {{ films.year }}</p>
+                        {% endif %}
+                        <div class="mb-3 text-center">
+                            {% for actor in films.actors %}
+                                <a href="{{ path('actor_show', { actorName: actor.name }) }}" class="btn btn-outline-primary btn-sm me-2 mb-2">{{ actor.name }}</a>
+                            {% endfor %}
+                        </div>
+                        <p class="card-text text-center"><strong>Synopsis:</strong> {{ films.synopsis }}</p>
+                        {% if films.trailer is not empty %}
+                            <p class="card-text text-center">
+                                <a href="{{ films.trailer }}" class="text-primary" style="text-decoration: none; cursor: pointer;">
+                                    Voir la bande annonce
+                                </a>
+                            </p>
+                        {% endif %}
+                        {% if films.type is not empty %}
+                            <p class="card-text text-center"><strong>Support:</strong> {{ films.type }}</p>
+                        {% endif %}
+                        {% if films.location is not empty %}
+                            <p class="card-text text-center"><strong>Position dans l'étagère:</strong> {{ films.location }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

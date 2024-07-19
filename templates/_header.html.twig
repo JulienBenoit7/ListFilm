@@ -1,0 +1,30 @@
+<div class="header bg-secondary text-white py-2">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <a href="/" class="text-white text-decoration-none">
+                    <h2 class="m-0 fs-4">Le Vidéo Club</h2>
+                </a>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <a href="{{ path('admin_index') }}" class="text-white text-decoration-none me-3">Espace Administrateur</a>
+                <p id="time" class="m-0"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    <script>
+        function displayTime() {
+            let date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            minutes = minutes.toString().padStart(2, '0');
+            let time = hours + ":" + minutes;
+            document.getElementById("time").innerText = time;
+            setTimeout(displayTime, 1000);
+        }
+        displayTime();
+    </script>
+{% endblock %}

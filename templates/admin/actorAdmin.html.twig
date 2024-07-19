@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des acteurs administrateur{% endblock %}
+
+{% block body %}
+<a class="btn btn-danger btn-menu mb-3" href="{{ path('admin_index') }}">Menu administrateur</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="title text-center mb-4">Liste des acteurs disponibles</h1>
+            <table class="table text-center">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for actor in actors %}
+                    <tr>
+                        <td class="align-middle">{{ actor.name }}</td>
+                        <td class="align-middle">
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ path('actor_edit', {'id': actor.id}) }}" class="btn btn-danger me-2">Modifier</a>
+                                <form method="post" action="{{ path('actor_delete', {'id': actor.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet acteur ?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ actor.id) }}">
+                                    <button type="submit" class="btn btn-secondary">Supprimer</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% endblock %}

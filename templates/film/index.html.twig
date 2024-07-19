@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de mes films{% endblock %}
+
+{% block body %}
+<a class="btn btn-primary btn-menu mb-3" href="{{ path('app_index') }}">Retour à la page d'accueil</a>
+<h1 class="title text-primary text-center">Tous les films</h1>
+
+{{ form_start(form) }}
+<div class="form-group row align-items-end">
+    <div class="col">
+        {{ form_widget(form.search, {
+            'attr': {
+                'class': 'form-control border shadow-sm',
+                'placeholder': 'Rechercher un film...'
+            }
+        }) }}
+    </div>
+    <div class="col-auto">
+        <div role="group" aria-label="Actions">
+            <button class="btn btn-primary btn-menu" type="submit">Rechercher</button>
+            <button class="btn btn-secondary btn-menu" type="button"
+                    onclick="window.location.href='{{ path('film_index') }}'">Réinitialiser
+            </button>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}
+
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-5 g-3">
+        {% for film in films %}
+        <div class="col">
+            <div class="card shadow-sm">
+                {% if film.poster is not empty %}
+                <img src="{{ vich_uploader_asset(film) }}" class="card-img-top" style="width: auto; height: 15rem;" alt="{{ film.title }}">
+                {% else %}
+                <img src="{{ asset('uploads/images/posters/Clapperboard_1000_0001.jpg') }}"
+                     class="card-img-top img-fluid" style="width: auto; height: 15rem;"  alt="Image par défaut">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ film.title }}</h5>
+                    <p class="card-text">{{ film.synopsis | slice(0, 100) ~ '...' }}</p>
+                    <a href="{{ path('film_show', { id: film.id }) }}" class="btn btn-primary btn-menu">Voir la
+                        fiche</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <div class="col">
+                <p class="no-films text-center">Aucun film trouvé.</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

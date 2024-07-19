@@ -1,0 +1,12 @@
+# webpack_encore.yaml
+webpack_encore:
+    output_path: '%kernel.project_dir%/public/build'
+
+    # Utilise addEntry pour inclure Bootstrap dans le bundle de ton application
+    builds:
+        app: '%kernel.project_dir%/assets/js/app.js' # Chemin vers ton fichier JavaScript principal
+        bootstrap: '%kernel.project_dir%/node_modules/bootstrap/dist/js/bootstrap.bundle.js' # Ajoute Bootstrap
+
+framework:
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'

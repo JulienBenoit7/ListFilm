@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ series.title }}
+{% endblock %}
+
+{% block body %}
+    <a class="btn btn-success" href="{{ path('series_index') }}">
+        Retour à la liste des séries
+    </a>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <div class="card shadow-sm">
+                    {% if series.poster is not empty %}
+                        <img src="{{ vich_uploader_asset(series) }}" class="card-img-top img-fluid" style="max-height: 25rem; object-fit: cover;" alt="{{ series.title }}">
+                    {% else %}
+                        <img src="{{ asset('uploads/images/posters/Clapperboard_1000_0001.jpg') }}"
+                             class="card-img-top img-fluid" style="max-height: 25rem;" alt="Image par défaut">
+                    {% endif %}
+                    <div class="card-body">
+                        <h1 class="card-title text-center text-success">{{ series.title }}</h1>
+                        <h5 class="card-subtitle mb-2 text-center">
+                            Catégorie: <a href="{{ path('category_show', { categoryName: series.category.name }) }}" class="text-decoration-none text-success">{{ series.category.name }}</a>
+                        </h5>
+                        {% if series.year is not empty %}
+                            <p class="card-text text-center"><strong>Année de sortie:</strong> {{ series.year }}</p>
+                        {% endif %}
+                        <div class="mb-3 text-center">
+                            {% for actor in series.actors %}
+                                <a href="{{ path('actor_show', { actorName: actor.name }) }}" class="btn btn-outline-success btn-sm me-2 mb-2">{{ actor.name }}</a>
+                            {% endfor %}
+                        </div>
+                        <p class="card-text text-center"><strong>Synopsis:</strong> {{ series.synopsis }}</p>
+                        {% if series.trailer is not empty %}
+                            <p class="card-text text-center"><a href="{{ series.trailer }}" class="text-success" style="text-decoration: none; cursor: pointer;">Voir la bande annonce</a></p>
+                        {% endif %}
+                        {% if series.type is not empty %}
+                            <p class="card-text text-center"><strong>Support:</strong> {{ series.type }}</p>
+                        {% endif %}
+                        {% if series.location is not empty %}
+                            <p class="card-text text-center"><strong>Position dans l'étagère:</strong> {{ series.location }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
