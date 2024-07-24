@@ -14,14 +14,6 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/season', name: 'season_')]
 class SeasonController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(SeasonRepository $seasonRepository): Response
-    {
-        return $this->render('season/index.html.twig', [
-            'seasons' => $seasonRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -59,7 +51,7 @@ class SeasonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('season_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('season/edit.html.twig', [
@@ -76,6 +68,6 @@ class SeasonController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('season_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_index', [], Response::HTTP_SEE_OTHER);
     }
 }

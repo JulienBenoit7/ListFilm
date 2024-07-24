@@ -14,7 +14,7 @@
                         {% if films.poster is not empty %}
                             <img src="{{ vich_uploader_asset(films) }}" class="card-img-top img-fluid" style="width: auto; height: 25rem;" alt="{{ films.title }}">
                         {% else %}
-                            <img src="{{ asset('uploads/images/posters/Clapperboard_1000_0001.jpg') }}" class="card-img-top img-fluid" style="width: auto; height: 25rem;" alt="Image par défaut">
+                            <img src="{{ asset('uploads/images/posters/Clapperboard_1000_0001.jpg') }}" class="card-img-top img-fluid" style="max-height: 25rem; width: auto" alt="Image par défaut">
                         {% endif %}
                     </div>
                     <div class="card-body">

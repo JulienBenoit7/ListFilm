@@ -23,8 +23,8 @@ class FilmsType extends AbstractType
             ->add('trailer')
             ->add('posterFile', VichFileType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'download_uri' => true,])
+                'allow_delete' => false,
+                'download_uri' => false,])
             ->add('location')
             ->add('category', EntityType::class, [
                 'class' => Category::class,

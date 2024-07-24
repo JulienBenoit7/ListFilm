@@ -22,8 +22,8 @@ class SeriesType extends AbstractType
             ->add('trailer')
             ->add('posterFile', VichFileType::class, [
                 'required' => false,
-                'allow_delete' => true,
-                'download_uri' => true,])
+                'allow_delete' => false,
+                'download_uri' => false,])
             ->add('type')
             ->add('location')
             ->add('category', EntityType::class, [
